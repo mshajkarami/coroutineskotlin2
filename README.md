@@ -1,39 +1,23 @@
-// سرعت حرکت ماشین
-var speed = 5;
+var moveAmount = 5;
+var moving = false;
 
-// نگهداری وضعیت کلیدهای فشرده‌شده
-var keys = {};
-
-// گوش دادن به رویدادهای صفحه‌کلید
+// وقتی Space فشار داده می‌شه
 window.addEventListener("keydown", function(e) {
-    keys[e.keyCode] = true;
+    if (e.keyCode === 32) {
+        moving = true;
+    }
 });
+
+// وقتی Space رها می‌شه
 window.addEventListener("keyup", function(e) {
-    keys[e.keyCode] = false;
+    if (e.keyCode === 32) {
+        moving = false;
+    }
 });
 
-// حلقه‌ی حرکتی در هر فریم
+// در هر فریم بررسی کن
 this.on("tick", function() {
-    // فلش بالا → حرکت به جلو
-    if (keys[38]) { // ArrowUp
-        car.x += Math.cos(car.rotation * Math.PI / 180) * speed;
-        car.y += Math.sin(car.rotation * Math.PI / 180) * speed;
-    }
-
-    // فلش پایین → عقب رفتن
-    if (keys[40]) { // ArrowDown
-        car.x -= Math.cos(car.rotation * Math.PI / 180) * speed;
-        car.y -= Math.sin(car.rotation * Math.PI / 180) * speed;
-    }
-
-    // فلش چپ → چرخش خلاف عقربه ساعت
-    if (keys[37]) { // ArrowLeft
-        car.rotation -= 5;
-    }
-
-    // فلش راست → چرخش در جهت عقربه ساعت
-    if (keys[39]) { // ArrowRight
-        car.rotation += 5;
+    if (moving) {
+        car.x += moveAmount; // حرکت به راست
     }
 });
-﻿# coroutineskotlin2
